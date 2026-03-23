@@ -27,7 +27,7 @@ export default function ProfileScreen({ activeTab, onTabChange }) {
 
   return (
     <div style={{ width:'100%', height:'100%', position:'relative',
-      background:'linear-gradient(180deg,#0E0E0F 0%,#1C1D21 100%)' }}>
+      background:'linear-gradient(180deg,#1C1D21 0%,#0E0E0F 100%)' }}>
       <StatusBar/>
 
       <div className="scroll" style={{

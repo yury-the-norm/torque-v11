@@ -182,27 +182,27 @@ export default function App() {
     ),
   }
 
+  if (!unlocked) {
+    return <PasswordGate onUnlock={() => setUnlocked(true)}/>
+  }
+
   return (
     <Stage>
       <PhoneShell showAnnotations={annots} screen={screen}>
-        {!unlocked ? (
-          <PasswordGate onUnlock={() => setUnlocked(true)}/>
-        ) : (
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
-              key={screen}
-              custom={dir}
-              variants={isTab ? fadeV : slideV}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={isTab ? TAB_T : PAGE_T}
-              style={{ position:'absolute', inset:0, willChange:'transform,opacity' }}
-            >
-              {SCREENS[screen] || SCREENS['journal']}
-            </motion.div>
-          </AnimatePresence>
-        )}
+        <AnimatePresence mode="wait" custom={dir}>
+          <motion.div
+            key={screen}
+            custom={dir}
+            variants={isTab ? fadeV : slideV}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={isTab ? TAB_T : PAGE_T}
+            style={{ position:'absolute', inset:0, willChange:'transform,opacity' }}
+          >
+            {SCREENS[screen] || SCREENS['journal']}
+          </motion.div>
+        </AnimatePresence>
       </PhoneShell>
     </Stage>
   )
