@@ -3,80 +3,163 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const PWD = import.meta.env.VITE_APP_PASSWORD || 'torque2025'
 
+/* The Norm logo SVG — white, scaled down */
+const TheNormLogo = () => (
+  <svg width="72" height="74" viewBox="0 0 214 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M116.161 136.4C128.553 136.4 138.163 141.896 145.842 149.087C153.284 156.055 159.478 165.17 165.003 173.218C170.795 181.654 175.926 189.036 181.745 194.434C187.325 199.612 192.946 202.4 199.709 202.4H214V220H199.709C187.234 220 177.542 214.538 169.786 207.34C162.269 200.364 156.041 191.246 150.505 183.182C144.701 174.73 139.598 167.345 133.824 161.938C128.289 156.754 122.766 154 116.161 154C109.554 154 104.022 156.756 98.4731 161.943C92.6882 167.351 87.5711 174.739 81.7602 183.188C76.2167 191.25 69.9852 200.364 62.4792 207.337C54.7359 214.529 45.0611 220 32.613 220H16.1233C11.2662 220 7.32877 216.06 7.32877 211.2V167.2H24.9178V202.4H32.613C39.3313 202.4 44.9334 199.621 50.5126 194.437C56.3292 189.036 61.4673 181.65 67.27 173.212C72.8051 165.161 79.0126 156.049 86.4651 149.081C94.1538 141.894 103.772 136.4 116.161 136.4Z" fill="white"/>
+    <path fillRule="evenodd" clipRule="evenodd" d="M80.0095 72.9724C84.0709 72.9724 87.6748 73.6233 90.8209 74.9247C94.0241 76.1693 96.7418 77.8944 98.9727 80.101C101.204 82.3076 102.92 84.8831 104.121 87.8253C105.322 90.7106 105.922 93.7658 105.922 96.9905V98.9441C105.922 102.112 105.35 105.14 104.206 108.025C103.062 110.854 101.374 113.371 99.143 115.577C96.9694 117.784 94.2817 119.538 91.0786 120.84C87.8751 122.084 84.1853 122.707 80.0095 122.707C75.8909 122.707 72.2298 122.084 69.0264 120.84C65.823 119.538 63.1055 117.784 60.8745 115.577C58.7011 113.371 57.0416 110.854 55.8975 108.025C54.7537 105.14 54.1814 102.112 54.1813 98.9441V96.9905C54.1814 93.7658 54.7537 90.7106 55.8975 87.8253C57.0989 84.8831 58.8154 82.3076 61.0463 80.101C63.3343 77.8945 66.0809 76.1693 69.2841 74.9247C72.4874 73.6233 76.0626 72.9724 80.0095 72.9724ZM80.0095 84.4307C77.4926 84.4307 75.3186 85.0243 73.488 86.2125C71.6579 87.4006 70.2565 89.0129 69.2841 91.0494C68.3689 93.0295 67.9114 95.3499 67.9113 98.0089C67.9113 100.498 68.3689 102.762 69.2841 104.799C70.1993 106.836 71.5717 108.422 73.4021 109.553C75.2326 110.685 77.4355 111.249 80.0095 111.249C82.698 111.249 84.9296 110.685 86.7027 109.553C88.476 108.422 89.8198 106.836 90.735 104.799C91.7074 102.762 92.1936 100.498 92.1936 98.0089C92.1936 95.3499 91.7074 93.0295 90.735 91.0494C89.7626 89.0129 88.3612 87.4006 86.531 86.2125C84.7578 85.0243 82.5836 84.4307 80.0095 84.4307Z" fill="white"/>
+    <path d="M33.645 73.1414C39.1365 73.1415 43.3126 74.9251 46.1727 78.4896C49.0898 81.9975 50.5484 87.3444 50.5484 94.5298V121.095H36.8199V93.7664C36.8199 91.2771 36.0754 89.2405 34.5884 87.6562C33.1011 86.0721 31.099 85.2788 28.5822 85.2786C26.0082 85.2788 23.9201 86.0999 22.3184 87.7407C20.7743 89.3249 20.0025 91.4178 20.0024 94.0199V121.095H6.2724V74.5851H17.1697V86.2253C17.4416 84.9382 17.7828 83.7448 18.1988 82.6476C19.4573 79.4791 21.3461 77.1033 23.8629 75.519C26.3797 73.9348 29.4402 73.1415 33.0438 73.1414H33.645Z" fill="white"/>
+    <path d="M139.358 85.7026H135.926C132.15 85.7026 129.233 86.7223 127.174 88.7592C125.115 90.7395 124.085 93.6251 124.085 97.4159V121.095H110.355V74.5852H121.252V89.935C121.774 85.5533 123.091 82.0204 125.2 79.3376C128.06 75.7732 132.179 73.9907 137.556 73.9907H139.358V85.7026Z" fill="white"/>
+    <path d="M168.094 73.1414C171.64 73.1414 174.587 73.9627 176.933 75.6036C179.335 77.1876 181.136 79.564 182.337 82.732C182.398 82.8843 182.456 83.0402 182.514 83.1961C182.568 83.04 182.623 82.8844 182.681 82.732C183.939 79.5639 185.771 77.1877 188.173 75.6036C190.576 73.963 193.522 73.1415 197.01 73.1414H197.61C201.157 73.1414 204.133 73.9627 206.535 75.6036C208.994 77.1876 210.853 79.564 212.112 82.732C213.37 85.9006 214 89.863 214 94.6157V121.095H200.272V93.851C200.272 91.3051 199.584 89.2404 198.212 87.6562C196.896 86.0721 195.008 85.2788 192.549 85.2786C190.089 85.2786 188.143 86.0999 186.714 87.7407C185.283 89.325 184.569 91.447 184.569 94.1059V121.095H170.754V93.851C170.754 91.3051 170.067 89.2404 168.695 87.6562C167.379 86.0721 165.52 85.2788 163.118 85.2786C160.601 85.2786 158.627 86.0999 157.196 87.7407C155.767 89.325 155.052 91.447 155.052 94.1059V121.095H141.324V74.5851H152.221V86.3085C152.493 85.0218 152.834 83.8288 153.25 82.732C154.451 79.5639 156.254 77.1876 158.656 75.6036C161.058 73.963 164.005 73.1414 167.493 73.1414H168.094Z" fill="white"/>
+    <path fillRule="evenodd" clipRule="evenodd" d="M109.568 14.3271C114.602 14.3272 118.835 15.4586 122.267 17.7217C125.757 19.9284 128.417 22.8433 130.247 26.4643C132.078 30.0289 132.993 33.9327 132.993 38.1762V42.7596H98.6492C98.8467 44.1381 99.1688 45.412 99.6154 46.5795C100.416 48.6158 101.674 50.2004 103.39 51.3318C105.106 52.4635 107.338 53.029 110.083 53.029C112.6 53.029 114.659 52.5472 116.261 51.5854C117.863 50.6236 118.95 49.4361 119.522 48.0218H132.135C131.449 51.1335 130.105 53.9062 128.103 56.3392C126.101 58.7721 123.583 60.6674 120.551 62.0253C117.519 63.3831 114.03 64.062 110.083 64.062C106.079 64.062 102.533 63.3833 99.4436 62.0253C96.4118 60.6674 93.8664 58.8559 91.8072 56.5926C89.8051 54.2729 88.2605 51.6986 87.1736 48.8697C86.1441 45.9843 85.6293 43.0425 85.6292 40.0439V38.3452C85.6293 35.2337 86.1442 32.2637 87.1736 29.4349C88.2605 26.5494 89.805 23.9739 91.8072 21.7106C93.8092 19.4476 96.2975 17.6652 99.2718 16.3638C102.303 15.006 105.736 14.3272 109.568 14.3271ZM109.568 25.3615C107.166 25.3617 105.135 25.8979 103.476 26.9728C101.817 28.0477 100.559 29.6322 99.7013 31.7253C99.2844 32.7147 98.9694 33.8186 98.7551 35.0352H119.954C119.755 33.7315 119.44 32.5435 119.007 31.4717C118.206 29.4915 117.004 27.9913 115.402 26.9728C113.858 25.8982 111.913 25.3615 109.568 25.3615Z" fill="white"/>
+    <path d="M19.9065 15.9399H33.6364V25.87H19.9065V44.7963C19.9065 47.0026 20.4789 48.6998 21.6228 49.888C22.824 51.0196 24.5119 51.5852 26.6857 51.5853H33.6364V63.0437H27.0291C22.2814 63.0437 18.448 62.4778 15.5307 61.3463C12.6136 60.1582 10.4679 58.2054 9.09512 55.4898C7.77957 52.7173 7.12122 48.9823 7.12122 44.2863V25.87H0V15.9399H7.12122V3.37866H19.9065V15.9399Z" fill="white"/>
+    <path d="M51.4488 23.6872C52.6406 20.786 54.328 18.5706 56.5117 17.0428C58.8569 15.3457 61.8028 14.4962 65.3491 14.4962H65.9502C71.1553 14.4964 75.1311 16.336 77.8768 20.0134C80.6224 23.6346 81.9948 28.9546 81.9948 35.9706V62.4493H68.2663V35.1212C68.2663 32.5755 67.4943 30.5386 65.9502 29.0111C64.4632 27.4269 62.4895 26.6336 60.0301 26.6335C57.4559 26.6335 55.3665 27.4546 53.7649 29.0956C52.2207 30.7362 51.4488 32.9143 51.4488 35.6297V62.4493H37.7188V0.492676H51.4488V23.6872Z" fill="white"/>
+  </svg>
+)
+
 export default function PasswordGate({ onUnlock }) {
-  const [val, setVal]   = useState('')
-  const [err, setErr]   = useState(false)
+  const [val,   setVal] = useState('')
+  const [err,   setErr] = useState(false)
   const [shake, setShk] = useState(false)
+  const [focus, setFocus] = useState(false)
 
   function attempt() {
     if (val === PWD) { onUnlock(); return }
     setErr(true); setShk(true); setVal('')
     setTimeout(() => setShk(false), 500)
-    setTimeout(() => setErr(false), 1800)
+    setTimeout(() => setErr(false), 2000)
   }
 
   return (
     <div style={{
-      width:'100%', height:'100%',
-      background:'linear-gradient(180deg,#0E0E0F 0%,#1C1D21 100%)',
-      display:'flex', flexDirection:'column',
-      alignItems:'center', justifyContent:'center',
-      padding:32,
+      width: '100vw', height: '100vh',
+      /* Subtle dark gradient matching the reference screenshot */
+      background: 'radial-gradient(ellipse at 50% 0%, #1a1f2e 0%, #0d0f14 60%, #0a0b0e 100%)',
+      display: 'flex', flexDirection: 'column',
+      alignItems: 'center', justifyContent: 'center',
+      padding: '0 40px',
+      fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     }}>
+
+      {/* Card */}
       <motion.div
-        initial={{opacity:0,y:-16}} animate={{opacity:1,y:0}}
-        style={{ marginBottom:40, textAlign:'center' }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+        style={{
+          width: '100%', maxWidth: 340,
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center',
+        }}
       >
-        <div style={{
-          width:72, height:72,
-          background:'linear-gradient(135deg,#F04E23,#c93b18)',
-          borderRadius:18, display:'flex', alignItems:'center', justifyContent:'center',
-          margin:'0 auto 16px',
-          boxShadow:'0 8px 32px rgba(240,78,35,0.35)',
-        }}>
-          <span style={{ fontFamily:'Teko,sans-serif', fontSize:48, fontWeight:700, color:'#fff', lineHeight:1 }}>T</span>
-        </div>
-        <div style={{ fontFamily:'Teko,sans-serif', fontSize:32, fontWeight:400, color:'#fff', letterSpacing:'2px', textTransform:'uppercase' }}>TORQUE</div>
-        <div style={{ fontFamily:'Inter,sans-serif', fontSize:13, fontWeight:300, color:'rgba(255,255,255,0.4)', letterSpacing:'0.12em', textTransform:'uppercase', marginTop:4 }}>Prototype Access</div>
-      </motion.div>
+        {/* Logo */}
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          style={{ marginBottom: 20, opacity: 0.92 }}
+        >
+          <TheNormLogo/>
+        </motion.div>
 
-      <motion.div animate={shake ? {x:[-10,10,-8,8,-4,4,0]} : {}} transition={{duration:0.45}} style={{width:'100%'}}>
-        <div style={{
-          background:'rgba(255,255,255,0.05)',
-          border:`1px solid ${err ? '#F04E23' : 'rgba(255,255,255,0.1)'}`,
-          borderRadius:8, display:'flex', alignItems:'center',
-          padding:'0 16px', marginBottom:8,
-          transition:'border-color 0.2s',
-        }}>
-          <input
-            type="password"
-            placeholder="Enter password"
-            value={val}
-            onChange={e => setVal(e.target.value)}
-            onKeyDown={e => e.key==='Enter' && attempt()}
-            autoFocus
+        {/* Created by the norm */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.22, duration: 0.5 }}
+          style={{
+            fontSize: 13,
+            fontWeight: 400,
+            color: 'rgba(255,255,255,0.35)',
+            letterSpacing: '0.01em',
+            marginBottom: 44,
+          }}
+        >Created by the norm</motion.div>
+
+        {/* Form */}
+        <motion.div
+          animate={shake ? { x: [-8, 8, -6, 6, -3, 3, 0] } : {}}
+          transition={{ duration: 0.42 }}
+          style={{ width: '100%' }}
+        >
+          {/* Password label */}
+          <div style={{
+            fontSize: 11,
+            fontWeight: 500,
+            color: 'rgba(255,255,255,0.4)',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            marginBottom: 8,
+          }}>Password</div>
+
+          {/* Input */}
+          <div style={{
+            background: 'rgba(255,255,255,0.04)',
+            border: `1px solid ${err ? 'rgba(220,80,60,0.6)' : focus ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.08)'}`,
+            borderRadius: 8,
+            marginBottom: err ? 8 : 16,
+            transition: 'border-color 0.18s',
+          }}>
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={val}
+              onChange={e => { setVal(e.target.value); setErr(false) }}
+              onKeyDown={e => e.key === 'Enter' && attempt()}
+              onFocus={() => setFocus(true)}
+              onBlur={() => setFocus(false)}
+              autoFocus
+              style={{
+                width: '100%',
+                background: 'none', border: 'none', outline: 'none',
+                color: '#fff',
+                fontSize: 15,
+                fontWeight: 400,
+                fontFamily: 'inherit',
+                letterSpacing: '0.06em',
+                padding: '13px 16px',
+              }}
+            />
+          </div>
+
+          {/* Error */}
+          <AnimatePresence>
+            {err && (
+              <motion.div
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                style={{
+                  fontSize: 12,
+                  color: 'rgba(220,80,60,0.9)',
+                  marginBottom: 10,
+                  paddingLeft: 2,
+                }}
+              >Incorrect password</motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Button — white */}
+          <motion.button
+            onClick={attempt}
+            whileHover={{ background: 'rgba(255,255,255,0.92)' }}
+            whileTap={{ scale: 0.98, background: 'rgba(255,255,255,0.85)' }}
             style={{
-              flex:1, background:'none', border:'none', outline:'none',
-              color:'#fff', fontSize:16, padding:'14px 0',
-              fontFamily:'Inter,sans-serif', letterSpacing:'0.1em',
+              width: '100%',
+              height: 44,
+              borderRadius: 8,
+              background: '#fff',
+              border: 'none',
+              fontSize: 14,
+              fontWeight: 500,
+              fontFamily: 'inherit',
+              letterSpacing: '0.02em',
+              color: '#0d0f14',
+              cursor: 'pointer',
+              transition: 'background 0.15s',
             }}
-          />
-        </div>
-
-        <AnimatePresence>
-          {err && (
-            <motion.div initial={{opacity:0,y:-4}} animate={{opacity:1,y:0}} exit={{opacity:0}}
-              style={{ fontFamily:'Inter,sans-serif', fontSize:12, color:'#F04E23', textAlign:'center', marginBottom:8 }}
-            >Incorrect password</motion.div>
-          )}
-        </AnimatePresence>
-
-        <button onClick={attempt} className="pressable" style={{
-          width:'100%', height:44, borderRadius:6,
-          background:'#F04E23', border:'none',
-          fontFamily:'Teko,sans-serif', fontSize:24, fontWeight:500,
-          letterSpacing:'1.1px', color:'#fff', cursor:'pointer',
-        }}>ENTER</button>
+          >Enter</motion.button>
+        </motion.div>
       </motion.div>
     </div>
   )
