@@ -37,10 +37,10 @@ export default function JournalScreen({ onStartWorkout, onOpenDetail, activeTab,
 
   return (
     <div style={{ width:'100%', height:'100%', position:'relative',
-      background:'linear-gradient(180deg,#0E0E0F 0%,#1C1D21 100%)' }}>
+      background:'linear-gradient(180deg,#1C1D21 0%,#0E0E0F 100%)' }}>
       <StatusBar/>
       <div className="scroll" style={{
-        position:'absolute', top:54, left:0, right:0, bottom:90, overflowY:'auto' }}>
+        position:'absolute', top:'var(--status-h, 54px)', left:0, right:0, bottom:'var(--nav-h, 90px)', overflowY:'auto' }}>
         <div style={{ padding:'8px 16px 8px', display:'flex', flexDirection:'column', gap:16 }}>
 
           {/* Title: Teko 32px #F04E23 */}
@@ -48,11 +48,11 @@ export default function JournalScreen({ onStartWorkout, onOpenDetail, activeTab,
             color:'#F04E23', lineHeight:'36px' }}>My Journal</div>
 
           {/* Chart card: w=370 r=8 bg=#1C1D21 p l=8 r=8 t=16 b=16 gap=16 */}
-          <div style={{ width:370, borderRadius:8, background:'#1C1D21',
+          <div style={{ width:"var(--card-w, 370px)", borderRadius:8, background:'#1C1D21',
             padding:'16px 8px', display:'flex', flexDirection:'column', gap:16 }}>
 
             {/* Header row: title + filter tabs */}
-            <div style={{ width:354, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+            <div style={{ width:"var(--chart-w, 354px)", display:'flex', alignItems:'center', justifyContent:'space-between' }}>
               <span style={{ fontFamily:'Inter,sans-serif', fontSize:13, fontWeight:300,
                 color:'rgba(255,255,255,0.55)', textTransform:'uppercase', letterSpacing:'0.06em' }}>
                 Progress Peak Force
@@ -106,7 +106,7 @@ export default function JournalScreen({ onStartWorkout, onOpenDetail, activeTab,
             whileHover={{ scale:1.02, filter:'brightness(1.1)' }}
             whileTap={{ scale:0.97 }}
             style={{
-              width:370, height:44, borderRadius:6, background:'#F04E23', border:'none',
+              width:"var(--card-w, 370px)", height:44, borderRadius:6, background:'#F04E23', border:'none',
               fontFamily:'Teko,sans-serif', fontSize:24, fontWeight:500,
               letterSpacing:'1.1px', color:'#fff', cursor:'pointer', textTransform:'uppercase' }}>
             START WORKOUT
@@ -123,7 +123,7 @@ export default function JournalScreen({ onStartWorkout, onOpenDetail, activeTab,
               initial={{opacity:0,y:10}} animate={{opacity:1,y:0}} transition={{delay:i*0.07}}
               whileHover={{ scale:1.01, borderColor:'rgba(255,255,255,0.14)' }}
               whileTap={{ scale:0.98 }}
-              style={{ width:370, borderRadius:8, background:'#1C1D21',
+              style={{ width:"var(--card-w, 370px)", borderRadius:8, background:'#1C1D21',
                 padding:8, display:'flex', flexDirection:'column', gap:8,
                 cursor:'pointer', border:'1px solid rgba(255,255,255,0.06)' }}
               onClick={() => onOpenDetail && onOpenDetail(w)}>

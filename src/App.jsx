@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useIsMobile } from './hooks/useIsMobile.js'
 
 import Stage        from './shell/Stage.jsx'
 import PhoneShell   from './shell/PhoneShell.jsx'
@@ -182,27 +183,49 @@ export default function App() {
     ),
   }
 
+  const isMobile = useIsMobile()
+
+  if (!unlocked) {
+    return <PasswordGate onUnlock={() => setUnlocked(true)}/>
+  }
+
+  const screenContent = (
+    <AnimatePresence mode="wait" custom={dir}>
+      <motion.div
+        key={screen}
+        custom={dir}
+        variants={isTab ? fadeV : slideV}
+        initial="enter"
+        animate="center"
+        exit="exit"
+        transition={isTab ? TAB_T : PAGE_T}
+        style={{ position:'absolute', inset:0, willChange:'transform,opacity' }}
+      >
+        {SCREENS[screen] || SCREENS['journal']}
+      </motion.div>
+    </AnimatePresence>
+  )
+
+  /* ── Mobile: fullscreen, no phone shell, no stage ── */
+  if (isMobile) {
+    return (
+      <div style={{
+        position: 'fixed', inset: 0,
+        width: '100vw',
+        height: '100dvh',
+        background: 'linear-gradient(180deg,#1C1D21 0%,#0E0E0F 100%)',
+        overflow: 'hidden',
+      }}>
+        {screenContent}
+      </div>
+    )
+  }
+
+  /* ── Desktop: phone shell inside stage ── */
   return (
     <Stage>
       <PhoneShell showAnnotations={annots} screen={screen}>
-        {!unlocked ? (
-          <PasswordGate onUnlock={() => setUnlocked(true)}/>
-        ) : (
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
-              key={screen}
-              custom={dir}
-              variants={isTab ? fadeV : slideV}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={isTab ? TAB_T : PAGE_T}
-              style={{ position:'absolute', inset:0, willChange:'transform,opacity' }}
-            >
-              {SCREENS[screen] || SCREENS['journal']}
-            </motion.div>
-          </AnimatePresence>
-        )}
+        {screenContent}
       </PhoneShell>
     </Stage>
   )

@@ -25,7 +25,7 @@ export default function ContentDetailScreen({ content, onBack, onStart }) {
 
   return (
     <div style={{ width:'100%', height:'100%', position:'relative',
-      background:'linear-gradient(180deg,#0E0E0F 0%,#1C1D21 100%)' }}>
+      background:'linear-gradient(180deg,#1C1D21 0%,#0E0E0F 100%)' }}>
       <StatusBar/>
 
       {/* Back */}
@@ -39,7 +39,7 @@ export default function ContentDetailScreen({ content, onBack, onStart }) {
       </button>
 
       <div className="scroll" style={{
-        position:'absolute', top:54, left:0, right:0, bottom:88, overflowY:'auto' }}>
+        position:'absolute', top:'var(--status-h, 54px)', left:0, right:0, bottom:88, overflowY:'auto' }}>
 
         {/* Hero */}
         <div style={{

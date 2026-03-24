@@ -28,11 +28,11 @@ export default function KnowledgeScreen({ onOpenContent, activeTab, onTabChange 
 
   return (
     <div style={{ width:'100%', height:'100%', position:'relative',
-      background:'linear-gradient(180deg,#0E0E0F 0%,#1C1D21 100%)' }}>
+      background:'linear-gradient(180deg,#1C1D21 0%,#0E0E0F 100%)' }}>
       <StatusBar/>
 
       <div className="scroll" style={{
-        position:'absolute', top:54, left:0, right:0, bottom:90, overflowY:'auto' }}>
+        position:'absolute', top:'var(--status-h, 54px)', left:0, right:0, bottom:'var(--nav-h, 90px)', overflowY:'auto' }}>
         <div style={{ padding:'8px 16px 8px', display:'flex', flexDirection:'column', gap:16 }}>
 
           {/* Section Header: padding t=16 b=16 gap=4 */}
@@ -48,29 +48,37 @@ export default function KnowledgeScreen({ onOpenContent, activeTab, onTabChange 
             </div>
           </div>
 
-          {/* Tutorial Section: w=370 h=140 r=8 bg=#2D7FF9 p=16 gap=16 */}
-          <div style={{ width:370, borderRadius:8, background:'#2D7FF9',
-            padding:16, display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-            <div style={{ display:'flex', flexDirection:'column', gap:4, flex:1 }}>
-              {/* Teko 26px fw=400 */}
-              <div style={{ fontFamily:'Teko,sans-serif', fontSize:26, fontWeight:400,
-                color:'#fff', lineHeight:'30px' }}>Short tutorial</div>
-              {/* Inter 15px fw=300 */}
-              <div style={{ fontFamily:'Inter,sans-serif', fontSize:15, fontWeight:300,
-                color:'rgba(255,255,255,0.85)', lineHeight:'20px' }}>
-                How to connect to equipment.
+          {/* Tutorial card — same as FirstEntry: bg=#2D7FF9, image overflows top, outlined Watch btn */}
+          <div style={{ width:370, height:140, borderRadius:8, background:'#2D7FF9',
+            position:'relative', overflow:'hidden', flexShrink:0 }}>
+            {/* Text column */}
+            <div style={{ position:'absolute', top:16, left:16, right:156, bottom:16,
+              display:'flex', flexDirection:'column', justifyContent:'space-between' }}>
+              <div>
+                <div style={{ fontFamily:'Teko,sans-serif', fontSize:24, fontWeight:500,
+                  color:'#fff', textTransform:'uppercase', letterSpacing:'0.06em',
+                  lineHeight:'26px', marginBottom:4 }}>Short Tutorial</div>
+                <div style={{ fontFamily:'Inter,sans-serif', fontSize:14, fontWeight:300,
+                  color:'rgba(255,255,255,0.85)', lineHeight:'18px' }}>
+                  How to connect to equipment.
+                </div>
               </div>
+              <motion.button
+                whileHover={{ background:'rgba(255,255,255,0.15)' }}
+                whileTap={{ scale:0.94 }}
+                style={{ alignSelf:'flex-start', height:32, borderRadius:6, padding:'0 16px',
+                  background:'transparent', border:'1.5px solid rgba(255,255,255,0.8)',
+                  fontFamily:'Teko,sans-serif', fontSize:20, fontWeight:500,
+                  color:'#fff', cursor:'pointer', letterSpacing:'0.5px',
+                  transition:'background 0.15s' }}>
+                Watch
+              </motion.button>
             </div>
-            {/* Tutorial image 90×90 */}
-            <img src={tutorialImg} style={{ width:90, height:90, objectFit:'contain',
-              borderRadius:8, flexShrink:0, marginLeft:12 }} alt="tutorial"/>
-            {/* Watch btn: Figma w=65 h=32 r=6 bg=white Teko Medium 20px color=#2D7FF9 */}
-            <button className="pressable" style={{
-              width:65, height:32, borderRadius:6, background:'#fff', border:'none',
-              fontFamily:'Teko,sans-serif', fontSize:20, fontWeight:500,
-              color:'#2D7FF9', cursor:'pointer', flexShrink:0, marginLeft:8 }}>
-              Watch
-            </button>
+            {/* Image overflows top */}
+            <img src={tutorialImg}
+              style={{ position:'absolute', right:-4, top:-10,
+                width:152, height:160, objectFit:'contain', objectPosition:'right center' }}
+              alt="tutorial"/>
           </div>
 
           {/* Tabs: w=379 h=40 r=8 bg=#1C1D21 p=4 gap=2 */}
