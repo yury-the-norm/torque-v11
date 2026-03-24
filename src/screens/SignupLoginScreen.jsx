@@ -51,23 +51,23 @@ export default function SignupLoginScreen({ onBack, onComplete }) {
 
   return (
     <div style={{ width:'100%', height:'100%', position:'relative',
-      background:'linear-gradient(180deg,#0E0E0F 0%,#1C1D21 100%)' }}>
+      background:'linear-gradient(180deg,#1C1D21 0%,#0E0E0F 100%)' }}>
       <StatusBar/>
 
       {/* Back */}
-      <button onClick={onBack} className="pressable" style={{
+      <motion.button onClick={onBack} whileTap={{ scale:0.9 }} style={{
         position:'absolute', top:62, left:16,
-        width:36, height:36, borderRadius:8,
+        width:36, height:36, borderRadius:8, zIndex:20,
         background:'rgba(255,255,255,0.06)',
         border:'1px solid rgba(255,255,255,0.1)',
         display:'flex', alignItems:'center', justifyContent:'center',
         cursor:'pointer',
       }}>
         <ArrowLeft size={18} color="#fff"/>
-      </button>
+      </motion.button>
 
       <div style={{
-        position:'absolute', top:54, left:0, right:0, bottom:34,
+        position:'absolute', top:'var(--status-h, 54px)', left:0, right:0, bottom:34,
         display:'flex', flexDirection:'column', justifyContent:'center',
         padding:'0 24px',
       }}>

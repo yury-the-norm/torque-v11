@@ -30,12 +30,12 @@ const Btn = ({ label, onClick, variant }) => {
 export default function SplashScreen({ onStartWorkout, onLogin, onSignup }) {
   return (
     <div style={{ width:'100%', height:'100%', position:'relative',
-      background:'linear-gradient(180deg,#0E0E0F 0%,#1C1D21 100%)' }}>
+      background:'linear-gradient(180deg,#1C1D21 0%,#0E0E0F 100%)' }}>
       <StatusBar/>
 
       {/* Figma: Splash Content x=0 y=54 h=581 padding l=16 r=16 CENTER */}
       <div style={{
-        position:'absolute', top:54, left:16, right:16, height:581,
+        position:'absolute', top:'var(--status-h, 54px)', left:16, right:16, height:581,
         display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:32,
       }}>
         {/* Logo: Figma 166×92px */}
